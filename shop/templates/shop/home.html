@@ -1,0 +1,90 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %} Scuba Dive Dubai {% endblock title %}
+
+{% block content %}
+
+{% include 'shop/snippets/hero_snippet.html' %}
+
+
+<!--Main layout-->
+<main>
+    <div class="container">
+        <!--Section: Products-->
+        <section>
+
+            <!--Grid row-->
+            <div class="row">
+                <!--Grid column-->
+                <div class="col-12">
+                    <!-- Grid row -->
+                    <div class="row">
+                        <!--Grid column-->
+                        {% for item in items %}
+                        <div class=" col-lg-4 col-md-12 mb-4">
+                            <!--Card-->
+                            <div class="card card-ecommerce">
+                                <!--Card image-->
+                                <div class="view overlay">
+                                    <img src="{{ item.image.url }}" class="img-fluid" alt="">
+                                    <a href="{% url 'shop:product' item.slug %}">
+                                        <div class="mask rgba-white-slight"></div>
+                                    </a>
+                                </div>
+                                <!--Card image-->
+                                <!--Card content-->
+                                <div class="card-body">
+                                    <!--Category & Title-->
+                                    <!--Category & Title-->
+                                    <a href="{% url 'shop:category_detail' item.category.slug %}" class="grey-text">
+                                        <h5>{{ item.category }}</h5>
+                                    </a>
+                                    <h5 class="card-title mb-1"><strong><a href="{% url 'shop:product' item.slug %}"
+                                                class="dark-grey-text">{{ item.title }}</a></strong></h5>
+                                    {% if item.label %}
+                                    <span class="badge badge-{{ item.label.color}} mb-2">{{ item.label.title }}</span>
+                                    {% endif %}
+                                    <!--Card footer-->
+                                    <div class="card-footer pb-0 mt-3">
+                                        <div class="row mb-0">
+                                            {% if item.discount_price %}
+                                            <h5 class="mb-0 pb-0 mt-1 font-weight-bold"><span
+                                                    class="red-text"><strong>${{ item.discount_price }}</strong></span>
+                                                <span class="grey-text"><small><s>${{ item.price }}</s></small></span>
+                                            </h5>
+                                            {% else %}
+                                            <h5 class="mb-0 pb-0 mt-1 font-weight-bold"><span
+                                                    class=""><strong>${{ item.price }}</strong></span>
+                                            </h5>
+                                            {% endif %}
+                                            {% if user.is_authenticated %}
+                                            <span class="float-right">
+                                                <a class="" data-toggle="tooltip" data-placement="top"
+                                                    title="Add to Cart"><i class="fas fa-shopping-cart ml-3"></i></a>
+                                            </span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--Card content-->
+                            </div>
+                            <!--Card-->
+                        </div>
+                        <!--Grid column-->
+                        {% endfor %}
+                    </div>
+                    <!--Grid row-->
+                </div>
+            </div>
+            <!--Grid row-->
+        </section>
+        <!--Section: Products-->
+
+    </div>
+</main>
+<!--Main layout-->
+<!-- Pagination -->
+<div class="container">
+    {% include 'shop/snippets/paginate_snippet.html' %}
+</div>
+{% endblock content %}

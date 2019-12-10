@@ -1,0 +1,342 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %} Scuba Dive Dubai {% endblock title %}
+
+{% block content %}
+<!--Main layout-->
+<main class="mt-5">
+    <div class="container dark-grey-text">
+
+        <!-- Section: product details -->
+        <section id="productDetails" class="pb-5">
+
+            <!--News card-->
+            <div class="card mt-5 hoverable">
+                <div class="row mt-5">
+                    <div class="col-lg-6">
+                        <img class="card-img-top img-fluid px-3 h-75" src="{{ item.image.url }}" alt="Card image cap">
+                    </div>
+                    <div class="col-lg-5 mr-3 text-center text-md-left">
+                        <h2
+                            class="h2-responsive text-center text-md-left product-name font-weight-bold dark-grey-text mb-1 ml-xl-0 ml-4">
+                            <strong>{{ item.title }}</strong>
+                        </h2>
+                        {% if item.label %}
+                        <span
+                            class="badge badge-{{ item.label.color}} product mb-4 ml-xl-0 ml-4">{{ item.label.title }}</span>
+                        </strong>
+                        </h2>
+                        <!-- <span class="badge badge-success product mb-4 ml-2">{{ item.label }}</span> -->
+                        {% endif %}
+                        {% if item.discount_price %}
+                        <h3 class="h3-responsive text-center text-md-left mb-5 ml-xl-0 ml-4">
+                            <span class="red-text font-weight-bold">
+                                <strong>${{ item.discount_price}}</strong>
+                            </span>
+                            <span class="grey-text">
+                                <small>
+                                    <s>${{ item.price }}</s>
+                                </small>
+                            </span>
+                        </h3>
+                        {% else %}
+                        <h3 class="h3-responsive text-center text-md-left mb-5 ml-xl-0 ml-4">
+                            <span class="font-weight-bold">
+                                <strong>${{ item.price}}</strong>
+                            </span>
+                        </h3>
+                        {% endif %}
+                        <h4 class="h4-responsive dark-grey-text font-weight-bold mb-3">
+                            <strong>Description</strong>
+                        </h4>
+                        <hr>
+                        <p>{{ item.description }}</p>
+
+                        <!-- <p class="ml-xl-0 ml-4">
+                            <strong>Storage: </strong>64GB</p>
+                        <p class="ml-xl-0 ml-4">
+                            <strong>Size: </strong>9.6-inch</p>
+                        <p class="ml-xl-0 ml-4">
+                            <strong>Resolution: </strong>2048 x 1536</p>
+                        <p class="ml-xl-0 ml-4">
+                            <strong>Availability: </strong>In stock</p> -->
+
+                        <!-- Add to Cart -->
+                        <section class="color mt-auto">
+                            <div class="mt-5">
+                                <!-- <p class="grey-text">Choose your color</p>
+                                <div class="row text-center text-md-left">
+
+                                    <div class="col-md-4 col-12 "> -->
+                                <!--Radio group-->
+                                <!-- <div class="form-group">
+                                            <input class="form-check-input" name="group100" type="radio" id="radio100"
+                                                checked="checked">
+                                            <label for="radio100" class="form-check-label dark-grey-text">White</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4"> -->
+                                <!--Radio group-->
+                                <!-- <div class="form-group">
+                                            <input class="form-check-input" name="group100" type="radio" id="radio101">
+                                            <label for="radio101" class="form-check-label dark-grey-text">Silver</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4"> -->
+                                <!--Radio group-->
+                                <!-- <div class="form-group">
+                                            <input class="form-check-input" name="group100" type="radio" id="radio102">
+                                            <label for="radio102" class="form-check-label dark-grey-text">Gold</label>
+                                        </div>
+                                    </div>
+                                </div> -->
+
+                                <div class="row mt-3 mb-4">
+                                    <div class="col-md-12 text-center text-md-left text-md-right">
+                                        <form action="{% url 'shop:add_to_cart' item.slug %}" method="POST">
+                                            {% csrf_token %}
+                                            <button class="btn btn-primary btn-rounded" type="submit">
+                                                <i class="fas fa-cart-plus mr-2" aria-hidden="true"></i> Add to
+                                                cart</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <!-- /.Add to Cart -->
+                    </div>
+                </div>
+            </div>
+            <!--News card-->
+
+        </section>
+        <!-- Section: product details -->
+
+        <h2 class="h4-responsive dark-grey-text font-weight-bold pb-2 text-center">
+            <strong>More Info</strong>
+        </h2>
+        <hr class="mb-5">
+        {% for info in item.item_info.all %}
+        <div class="card p-3 mb-3">
+            <h4 class="h4-responsive dark-grey-text font-weight-bold mb-2">
+                <strong>{{ info.heading }}</strong>
+            </h4>
+            <p>{{ info.text }}</p>
+        </div>
+
+        {% endfor %}
+
+        <!--Table-->
+        <!-- <div class="card mb-5">
+            <div class="card-body">
+
+                <table class="table table-responsive-md">
+                    <thead>
+                        <tr>
+                            <th>
+                                <strong>Feature</strong>
+                            </th>
+                            <th>
+                                <strong>12.9-inch iPad Pro</strong>
+                            </th>
+                            <th>
+                                <strong>10.5-inch iPad Pro</strong>
+                            </th>
+                            <th>
+                                <strong>iPad mini 4</strong>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Storage</th>
+                            <td>64GB</td>
+                            <td>64GB</td>
+                            <td>32GB</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Weight</th>
+                            <td>1.49 pounds (677 grams)</td>
+                            <td>1.03 pounds (469 grams)</td>
+                            <td>0.65 pound (298.8 grams)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Width</th>
+                            <td>8.68 inches (220.6 mm)</td>
+                            <td>6.8 inches (174.1 mm)</td>
+                            <td>5.3 inches (134.8 mm)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Depth</th>
+                            <td>0.27 inch (6.9 mm)</td>
+                            <td>0.24 inch (6.1 mm)</td>
+                            <td>0.24 inch (6.1 mm)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Camera</th>
+                            <td>12-megapixel</td>
+                            <td>12-megapixel</td>
+                            <td>8-megapixel</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Video</th>
+                            <td>4K HD video recording </td>
+                            <td>4K HD video recording </td>
+                            <td>1080p HD video recording</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div> -->
+        <!--Table-->
+
+        <!-- Product Reviews -->
+        <!-- <section id="reviews" class="pb-5 mt-4">
+
+            <hr>
+            <h4 class="h4-responsive dark-grey-text font-weight-bold my-5 text-center">
+                <strong>Product Reviews</strong>
+            </h4>
+            <hr class="mb-5"> -->
+
+        <!--Main wrapper-->
+        <!-- <div class="comments-list text-center text-md-left"> -->
+
+        <!--First row-->
+        <!-- <div class="row mb-5"> -->
+        <!--Image column-->
+        <!-- <div class="col-sm-2 col-12 mb-3">
+                        <img src="" alt="sample image" class="avatar rounded-circle z-depth-1-half">
+                    </div> -->
+        <!--/.Image column-->
+
+        <!--Content column-->
+        <!-- <div class="col-sm-10 col-12">
+                        <a>
+                            <h5 class="user-name font-weight-bold">John Doe</h5>
+                        </a> -->
+        <!-- Rating -->
+        <!-- <ul class="rating">
+                            <li>
+                                <i class="fas fa-star blue-text"></i>
+                            </li>
+                            <li>
+                                <i class="fas fa-star blue-text"></i>
+                            </li>
+                            <li>
+                                <i class="fas fa-star blue-text"></i>
+                            </li>
+                            <li>
+                                <i class="fas fa-star blue-text"></i>
+                            </li>
+                            <li>
+                                <i class="fas fa-star blue-text"></i>
+                            </li>
+                        </ul>
+                        <div class="card-data">
+                            <ul class="list-unstyled mb-1">
+                                <li class="comment-date font-small grey-text">
+                                    <i class="far fa-clock-o"></i> 05/10/2015</li>
+                            </ul>
+                        </div>
+                        <p class="dark-grey-text article">Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo
+                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                            fugiat
+                            nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
+                    </div> -->
+        <!--/.Content column-->
+        <!-- </div> -->
+        <!--/.First row-->
+
+    </div>
+</main>
+<!--Main layout-->
+
+<!-- Cart Modal -->
+<div class="modal fade cart-modal" id="cart-modal-ex" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+
+                <h4 class="modal-title font-weight-bold dark-grey-text" id="myModalLabel">Your cart</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!--Body-->
+            <div class="modal-body">
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Product name</th>
+                            <th>Price</th>
+                            <th>Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Product 1</td>
+                            <td>100$</td>
+                            <td>
+                                <a>
+                                    <i class="fas fa-eraser"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Product 2</td>
+                            <td>100$</td>
+                            <td>
+                                <a>
+                                    <i class="fas fa-eraser"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>Product 3</td>
+                            <td>100$</td>
+                            <td>
+                                <a>
+                                    <i class="fas fa-eraser"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">4</th>
+                            <td>Product 4</td>
+                            <td>100$</td>
+                            <td>
+                                <a>
+                                    <i class="fas fa-eraser"></i>
+                                </a>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+                <button class="btn btn-primary btn-rounded btn-sm">Checkout</button>
+
+            </div>
+            <!--Footer-->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-grey btn-rounded btn-sm" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<!-- /.Cart Modal -->
+
+{% endblock content %}

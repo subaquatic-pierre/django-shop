@@ -1,0 +1,94 @@
+{% extends 'core/base.html' %}
+{% block title %} Scuba Dive Dubai {% endblock title %}
+
+{% block content %}
+<main class="mt-5">
+    <div class="container dark-grey-text">
+        <h5>{{ profile }}</h5>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Total Item Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order_item in order_items %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ order_item.item.title}}</td>
+                        {% if order_item.item.discount_price %}
+                        <td>${{ order_item.item.discount_price}} <span
+                                class=" ml-2 text-muted"><del>${{ order_item.item.price}}</del></span></td>
+                        {% else %}
+                        <td>${{ order_item.item.price}}</td>
+                        {% endif %}
+                        <!-- add more items button -->
+                        <td>
+                            <span class="mr-2"><a
+                                    href="{% url 'shop:remove_single_item_from_cart' order_item.item.slug %} "><i
+                                        class="fas fa-minus"></i></a></span>
+                            {{ order_item.quantity}}
+                            <span class="ml-2"></span><a href="{% url 'shop:add_to_cart' order_item.item.slug %}"><i
+                                    class="fas fa-plus"></i></a></span>
+                        </td>
+                        <!-- minus items button -->
+                        <td>
+                            {% if order_item.item.discount_price %}
+                            ${{ order_item.get_total_discount_price }}
+                            <span class=" ml-2 badge badge-primary">Saving ${{ order_item.get_amount_saved  }}</span>
+                            {% else %}
+                            ${{ order_item.get_final_price }}
+                            {% endif %}
+                            <a style='color: red;' href="{% url 'shop:remove_from_cart' order_item.item.slug %}">
+                                <i class="fas fa-trash float-right"></i>
+                            </a>
+                        </td>
+
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan=" 5">Your cart is empty</td>
+                    </tr>
+                    {% endfor %}
+                    {% if order.coupon %}
+                    <tr>
+                        <td colspan="4"><b>Coupon</b></td>
+                        <td><b>-${{ order.coupon.amount }}</b></td>
+                    </tr>
+                    {% endif %}
+                    {% if order.get_total %}
+                    <tr>
+                        <td colspan="4"><b>Total</b></td>
+                        <td><b>{{ order.get_total }}</b></td>
+                    </tr>
+                    <tr>
+                        <td colspan="5">
+                            <a href="{% url 'shop:checkout' %}" class="btn btn-warning float-right ml-2">Procceed to
+                                Checkout</a>
+                            <a href="{% url 'shop:home' %}" class="btn btn-primary float-right ml-2">Continue
+                                Shopping</a>
+                            <a href="{% url 'shop:delete_cart' %}" class="btn btn-danger float-right ml-2">Delete
+                                Order</a>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="5">
+                            <a href="{% url 'shop:home' %}" class="btn btn-primary float-right ml-2">Continue
+                                Shopping</a>
+                        </td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</main>
+
+{% endblock content %}

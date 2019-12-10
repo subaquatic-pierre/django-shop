@@ -1,0 +1,56 @@
+<!--Carousel Wrapper-->
+<div id="hero-header" class="d-flex flex-collumn align-items-center justify-content-center">
+    <div class="text-center">
+        {% if hero_header %}
+        <h1 class="display-2 text-light mb-2 pb-2" id="heading-text">{{ hero_header }}</h1>
+        {% else %}
+        <h1 class="display-2 text-light mb-2 pb-2" id="heading-text">This is the best</h1>
+        {% endif %}
+        <a href="{% url 'account_signup' %}" class="btn btn-success btn-lg mt-4">Join Today</a>
+    </div>
+</div>
+
+<div class="container">
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary lighten-3 mt-3 mb-5">
+
+        <!-- Navbar brand -->
+        <a href="{% url 'shop:category_list' %}"><span class="navbar-brand">Categories:</span></a>
+
+
+        <!-- Collapse button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+            aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+
+            <!-- Links -->
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">All
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                {% for category in categories %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'shop:category_detail' category.slug %}">{{ category.title }}</a>
+                </li>
+                {% endfor %}
+
+            </ul>
+            <!-- Links -->
+
+            <!-- <form class="form-inline">
+                <div class="md-form my-0">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                </div>
+            </form> -->
+        </div>
+        <!-- Collapsible content -->
+
+    </nav>
+    <!--/.Navbar-->
+</div>

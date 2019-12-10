@@ -1,0 +1,20 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %} Scuba Dive Dubai {% endblock title %}
+
+<body>
+  {% block content %}
+  <!--Carousel Wrapper-->
+  <div id="hero-header" class="d-flex flex-collumn align-items-center justify-content-center">
+    <div class="text-center">
+      <h1 class="display-2 text-light mb-2 pb-2" id="heading-text">Amazing HOME!</h1>
+      <a href="" class="btn btn-success btn-lg mt-4">Join Today</a>
+      <a href="{% url 'shop:home' %}" class="btn btn-primary">Shop</a>
+    </div>
+  </div>
+
+
+  <!--Main layout-->
+  <main>
+  </main>
+  {% endblock content %}

@@ -1,0 +1,92 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %} Scuba Dive Dubai {% endblock title %}
+
+{% block content %}
+
+{% include 'shop/snippets/hero_snippet.html' %}
+
+<!--Main layout-->
+<main>
+    <div class="container">
+
+        <!--Section: Products-->
+        <section>
+
+            <!--Grid row-->
+            <div class="row">
+                <!--Grid column-->
+                <div class="col-12">
+                    <!-- Grid row -->
+                    <div class="row">
+                        <!--Grid column-->
+                        {% for category in categories %}
+                        <div class="col-lg-4 col-md-12 mb-4">
+                            <!--Card-->
+                            <div class="card card-ecommerce">
+                                <!--Card image-->
+                                <div class="view overlay">
+                                    <img src="{{ category.image.url }}" class="img-fluid" alt="">
+                                    <a href="{% url 'shop:category_detail' category.slug %}">
+                                        <div class="mask rgba-white-slight"></div>
+                                    </a>
+                                </div>
+                                <!--Card image-->
+                                <!--Card content-->
+                                <div class="card-body">
+                                    <!--Category & Title-->
+                                    <!--Category & Title-->
+                                    <h5 class="card-title mb-1"><strong><a
+                                                href="{% url 'shop:category_detail' category.slug %}"
+                                                class=" dark-grey-text">{{ category.title }}</a></strong></h5>
+                                </div>
+                                <!--Card content-->
+                            </div>
+                            <!--Card-->
+                        </div>
+                        <!--Grid column-->
+                        {% endfor %}
+                    </div>
+                    <!--Grid row-->
+                </div>
+            </div>
+            <!--Grid row-->
+        </section>
+        <!--Section: Products-->
+
+
+
+
+        <!--Pagination-->
+        <nav class="d-flex justify-content-center wow fadeIn">
+            <ul class="pagination pg-blue">
+                {% if page_obj.has_previous %}
+                <!--Arrow left-->
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                {% endif %}
+                <li class="page-item active">
+                    <a class="page-link" href="#">{{ page_obj.number }}
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+        <!--Pagination-->
+
+    </div>
+</main>
+<!--Main layout-->
+{% endblock content %}
