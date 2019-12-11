@@ -2,5 +2,5 @@ env
 .pyc
 __pycache__
 scubadivedubai/settings/development.py
-.env
+.venv
 db.sqlite3
