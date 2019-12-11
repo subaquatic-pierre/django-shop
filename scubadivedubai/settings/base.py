@@ -1,8 +1,8 @@
+from .base import *
 import os
 from .config import Config
 
 # Ititialize settings from config.json file
-
 settings = Config()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -10,29 +10,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(
     os.path.dirname(os.path.abspath(__file__))))
 
 SECRET_KEY = settings.SECRET_KEY
-
-# Check if development or production environment
-
-if settings.DEVELOPMENT:
-    ALLOWED_HOSTS = ['127.0.0.1']
-    DEBUG = True
-    STATICFILES_DIRS = [os.path.join(BASE_DIR, "static_root")]
-else:
-    ALLOWED_HOSTS = ['18.217.113.27',
-                     'scubadivedubai.com', 'www.scubadivedubai.com']
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
-    DEBUG = settings.DEBUG
-    # DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': config('DB_NAME'),
-#         'USER': config('DB_USER'),
-#         'PASSWORD': config('DB_PASSWORD'),
-#         'HOST': config('DB_HOST'),
-#         'PORT': ''
-#     }
-# }
-
+ROOT_URLCONF = 'scubadivedubai.urls'
+STRIPE_PUBLIC_KEY = settings.STRIPE_LIVE_PUBLIC_KEY
+STRIPE_SECRET_KEY = settings.STRIPE_LIVE_SECRET_KEY
+# SET LOGOUT BUTTONG TO POST REQUEST ON EVENT LISTEN
+ACCOUNT_LOGOUT_ON_GET = True
 
 # Application definition
 
@@ -51,7 +33,6 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'crispy_forms',
     'django_countries',
-    'shop.apps.ShopConfig',
     'core'
 ]
 
@@ -64,8 +45,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-ROOT_URLCONF = 'scubadivedubai.urls'
 
 TEMPLATES = [
     {
@@ -83,11 +62,71 @@ TEMPLATES = [
     },
 ]
 
+
+# Check if development or production environment
+if settings.DEVELOPMENT:
+    ALLOWED_HOSTS = ['127.0.0.1']
+    DEBUG = True
+    STATICFILES_DIRS = [os.path.join(BASE_DIR, "static_root")]
+
+    # Set no email server for allauth
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    # Set shop to allow for notes to work, have to manualy create user profile
+    INSTALLED_APPS += ['shop', 'debug_toolbar']
+    MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware']
+
+    # DEBUG TOOLBAR SETTINGS
+
+    DEBUG_TOOLBAR_PANELS = [
+        'debug_toolbar.panels.versions.VersionsPanel',
+        'debug_toolbar.panels.timer.TimerPanel',
+        'debug_toolbar.panels.settings.SettingsPanel',
+        'debug_toolbar.panels.headers.HeadersPanel',
+        'debug_toolbar.panels.request.RequestPanel',
+        'debug_toolbar.panels.sql.SQLPanel',
+        'debug_toolbar.panels.staticfiles.StaticFilesPanel',
+        'debug_toolbar.panels.templates.TemplatesPanel',
+        'debug_toolbar.panels.cache.CachePanel',
+        'debug_toolbar.panels.signals.SignalsPanel',
+        'debug_toolbar.panels.logging.LoggingPanel',
+        'debug_toolbar.panels.redirects.RedirectsPanel',
+    ]
+
+    def show_toolbar(request):
+        return True
+
+    DEBUG_TOOLBAR_CONFIG = {
+        'INTERCEPT_REDIRECTS': False,
+        'SHOW_TOOLBAR_CALLBACK': show_toolbar
+    }
+
+# Production environment
+else:
+    ALLOWED_HOSTS = ['18.217.113.27',
+                     'scubadivedubai.com', 'www.scubadivedubai.com']
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
+    DEBUG = settings.DEBUG
+
+    # Email settings
+
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
+    EMAIL_HOST_USER = settings.EMAIL_HOST_USER
+    EMAIL_HOST_PASSWORD = settings.EMAIL_HOST_PASSWORD
+    # Set to ChopConfig to allow for shop signals to work
+    INSTALLED_APPS += ['shop.apps.ShopConfig']
+
+    AUTH_PASSWORD_VALIDATORS = [
+        {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+        {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+        {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+        {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'}
+    ]
+
+
 WSGI_APPLICATION = 'scubadivedubai.wsgi.application'
-
-# Internationalization
-# https://docs.djangoproject.com/en/2.2/topics/i18n/
-
 
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'Asia/Dubai'
@@ -109,9 +148,7 @@ AUTHENTICATION_BACKENDS = (
 # Site settings
 
 SITE_ID = 1
-
-# Profile settings
-
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = '/accounts/login/'
@@ -119,31 +156,6 @@ LOGIN_URL = '/accounts/login/'
 # TODO: Add custom form for UserSignUp in settings/base.py
 
 # ACCOUNT_SIGNUP_FORM_CLASS = 'yourapp.forms.SignupForm'
-
-# CRISPY FORMS
-
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
-# Email settings
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.environ.get('HOST_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('HOST_PASS')
-
-
-# Password validation
-# https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
-
-
-# AUTH_PASSWORD_VALIDATORS = [
-#     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
-#     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
-#     {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
-#     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'}
-# ]
 
 # TODO: Change database seetings when app is ready for publication
 
@@ -154,5 +166,13 @@ DATABASES = {
     }
 }
 
-STRIPE_PUBLIC_KEY = settings.STRIPE_LIVE_PUBLIC_KEY
-STRIPE_SECRET_KEY = settings.STRIPE_LIVE_SECRET_KEY
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': config('DB_NAME'),
+#         'USER': config('DB_USER'),
+#         'PASSWORD': config('DB_PASSWORD'),
+#         'HOST': config('DB_HOST'),
+#         'PORT': ''
+#     }
+# }
