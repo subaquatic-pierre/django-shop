@@ -1,12 +1,15 @@
 
+
+import os
 import json
 
-with open('/home/ubuntu/etc/config.json') as f:
+with open('config.json') as f:
 	config = json.load(f)
 
 class Config():
 
 	SECRET_KEY = config.get("SECRET_KEY")
+	DEBUG = config.get("DEBUG")
 	DB_NAME = "DB_NAME"
 	DB_USER = "your-db-user-name"
 	DB_PASSWORD = "DB_PASSWORD"

@@ -1,6 +1,8 @@
 import os
 from .config import Config
 
+ALLOWED_HOSTS = ['18.217.113.27','scubadivedubai.com', 'www.scubadivedubai.com']
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(
     os.path.dirname(os.path.abspath(__file__))))
@@ -13,6 +15,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(
 settings = Config()
 
 SECRET_KEY = settings.SECRET_KEY
+DEBUG = settings.DEBUG
 
 # Application definition
 
@@ -78,7 +81,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static_in_env')]
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static_root')]
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
@@ -120,11 +123,6 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.environ.get('HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('HOST_PASS')
 
-DEBUG = True
-ALLOWED_HOSTS = ['127.0.0.1']
-
-# DEBUG = config('DEBUG', cast=bool)
-# ALLOWED_HOSTS = ['ip-address', 'www.your-website.com']
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
