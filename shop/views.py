@@ -109,6 +109,7 @@ class CheckoutView(View):
             return redirect('shop:home')
 
     # TODO: Set logic when changing address to current in CheckoutView POST method
+    # TODO: Fix order billing/shipping address when order is made
     def post(self, request, *args, **kwargs):
         try:
             # Get user profile
@@ -173,9 +174,19 @@ class CheckoutView(View):
                         messages.info(
                             request, 'Please fill in the required shipping address fields')
                         return redirect('shop:checkout')
-
+                if same_billing_address and use_default_shipping:
+                    order_billing_address = Address(
+                        user=profile,
+                        address_line_1=profile.shipping_address.address_line_1,
+                        address_line_2=profile.shipping_address.address_line_2,
+                        country=profile.shipping_address.country,
+                        zip_code=profile.shipping_address.zip_code,
+                        address_type='B'
+                    )
+                    order.billing_address = profile.billing_address
+                    order.save()
                 # Billing Address Logic
-                if use_default_billing:
+                elif use_default_billing:
                     if profile.billing_address:
                         order.billing_address = profile.billing_address
                         order.save()
