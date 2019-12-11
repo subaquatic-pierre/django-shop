@@ -18,6 +18,7 @@ settings = Config()
 if settings.DEVELOPMENT:
     ALLOWED_HOSTS = ['127.0.0.1']
     DEBUG = True
+
 else:
     DEBUG = settings.DEBUG
 
