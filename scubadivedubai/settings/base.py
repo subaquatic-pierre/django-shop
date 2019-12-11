@@ -17,9 +17,12 @@ settings = Config()
 
 if settings.DEVELOPMENT:
     ALLOWED_HOSTS = ['127.0.0.1']
+    DEBUG = True
+else:
+    DEBUG = settings.DEBUG
 
 SECRET_KEY = settings.SECRET_KEY
-DEBUG = settings.DEBUG
+
 
 # Application definition
 
