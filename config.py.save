@@ -1,0 +1,27 @@
+import json
+
+with open('/home/etc/config.json', 'r') as config.file:
+	config = json.load(config.file)
+
+class Config():
+	{
+		"SECRET_KEY" : config.get("SECRET_KEY"),
+		"DB_NAME" : {
+	"SECRET_KEY" : "kobl@t=yw9d*0y%jt2gjnq78=u!z_rrxb&w8e47l!(jz@m79zy",
+	"DB_NAME" : "DB_NAME",
+	"DB_USER" : "your-db-user-name",
+	"DB_PASSWORD" : "DB_PASSWORD",
+	"DB_HOST" : "DB_HOST",
+	"STRIPE_LIVE_PUBLIC_KEY" : "STRIPE_LIVE_PUBLIC_KEY",
+	"STRIPE_LIVE_SECRET_KEY" : "STRIPE_LIVE_SECRET_KEY",
+	"EMAIL_HOST_USER" : "subaquatic.pierre@gmail.com",
+	"EMAIL_HOST_PASSWORD" : "somesupersecretpassword"
+}"DB_NAME",
+		"DB_USER" : "your-db-user-name",
+		"DB_PASSWORD" : "DB_PASSWORD",
+		"DB_HOST" : "DB_HOST",
+		"STRIPE_LIVE_PUBLIC_KEY" : "STRIPE_LIVE_PUBLIC_KEY",
+		"STRIPE_LIVE_SECRET_KEY" : "STRIPE_LIVE_SECRET_KEY",
+		"EMAIL_HOST_USER" : "subaquatic.pierre@gmail.com",
+		"EMAIL_HOST_PASSWORD" : "somesupersecretpassword"
+	}
