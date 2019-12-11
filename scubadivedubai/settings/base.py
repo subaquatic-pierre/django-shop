@@ -1,28 +1,37 @@
 import os
 from .config import Config
 
-ALLOWED_HOSTS = ['18.217.113.27',
-                 'scubadivedubai.com', 'www.scubadivedubai.com']
+# Ititialize settings from config.json file
+
+settings = Config()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(
     os.path.dirname(os.path.abspath(__file__))))
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
+SECRET_KEY = settings.SECRET_KEY
 
-# SECURITY WARNING: keep the secret key used in production secret!
-
-settings = Config()
+# Check if development or production environment
 
 if settings.DEVELOPMENT:
     ALLOWED_HOSTS = ['127.0.0.1']
     DEBUG = True
-
+    STATICFILES_DIRS = [os.path.join(BASE_DIR, "static_root")]
 else:
+    ALLOWED_HOSTS = ['18.217.113.27',
+                     'scubadivedubai.com', 'www.scubadivedubai.com']
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
     DEBUG = settings.DEBUG
-
-SECRET_KEY = settings.SECRET_KEY
+    # DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': config('DB_NAME'),
+#         'USER': config('DB_USER'),
+#         'PASSWORD': config('DB_PASSWORD'),
+#         'HOST': config('DB_HOST'),
+#         'PORT': ''
+#     }
+# }
 
 
 # Application definition
@@ -86,14 +95,7 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.2/howto/static-files/
-
-# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static_root')]
-
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
-
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
 
@@ -143,16 +145,7 @@ EMAIL_HOST_PASSWORD = os.environ.get('HOST_PASS')
 #     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'}
 # ]
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': config('DB_NAME'),
-#         'USER': config('DB_USER'),
-#         'PASSWORD': config('DB_PASSWORD'),
-#         'HOST': config('DB_HOST'),
-#         'PORT': ''
-#     }
-# }
+# TODO: Change database seetings when app is ready for publication
 
 DATABASES = {
     'default': {
