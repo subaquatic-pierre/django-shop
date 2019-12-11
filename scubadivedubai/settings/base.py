@@ -1,7 +1,8 @@
 import os
 from .config import Config
 
-ALLOWED_HOSTS = ['18.217.113.27','scubadivedubai.com', 'www.scubadivedubai.com']
+ALLOWED_HOSTS = ['18.217.113.27',
+                 'scubadivedubai.com', 'www.scubadivedubai.com']
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(
@@ -13,6 +14,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(
 # SECURITY WARNING: keep the secret key used in production secret!
 
 settings = Config()
+
+if settings.DEVELOPMENT:
+    ALLOWED_HOSTS = ['127.0.0.1']
 
 SECRET_KEY = settings.SECRET_KEY
 DEBUG = settings.DEBUG
