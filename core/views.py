@@ -16,4 +16,4 @@ class CustomSignupView(SignupView):
         self.user = form.save(self.request)
         send_email_confirmation(self.request, self.user, signup=True)
         messages.info(self.request, 'that is great account')
-        return redirect('shop:home')
+        return redirect('account_login')
