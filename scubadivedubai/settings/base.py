@@ -65,7 +65,7 @@ TEMPLATES = [
 
 # Check if development or production environment
 if settings.DEVELOPMENT:
-    ALLOWED_HOSTS = ['127.0.0.1']
+    ALLOWED_HOSTS = ['*']
     DEBUG = True
     STATICFILES_DIRS = [os.path.join(BASE_DIR, "static_root")]
 
@@ -102,8 +102,7 @@ if settings.DEVELOPMENT:
 
 # Production environment
 else:
-    ALLOWED_HOSTS = ['18.217.113.27',
-                     'scubadivedubai.com', 'www.scubadivedubai.com']
+    ALLOWED_HOSTS = ['*']
     STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
     DEBUG = settings.DEBUG
 
@@ -118,12 +117,12 @@ else:
     # Set to ChopConfig to allow for shop signals to work
     INSTALLED_APPS += ['shop.apps.ShopConfig']
 
-    AUTH_PASSWORD_VALIDATORS = [
-        {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
-        {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
-        {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
-        {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'}
-    ]
+    # AUTH_PASSWORD_VALIDATORS = [
+    #     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    #     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    #     {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    #     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'}
+    # ]
 
 
 WSGI_APPLICATION = 'scubadivedubai.wsgi.application'

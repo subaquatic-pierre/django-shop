@@ -1,8 +1,6 @@
-config.json
-env
+venv
 .pyc
 __pycache__
 scubadivedubai/settings/development.py
 .env
-db.sqlite3
 hero_snippet.html
