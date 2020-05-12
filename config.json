@@ -1,5 +1,5 @@
 {
-  "DEVELOPMENT": true,
+  "DEVELOPMENT": false,
   "SECRET_KEY": "somesupersecretkey",
   "DEBUG": false,
   "DB_NAME": "DB_NAME",
