@@ -1,7 +1,7 @@
 {
   "DEVELOPMENT": false,
   "SECRET_KEY": "somesupersecretkey",
-  "DEBUG": false,
+  "DEBUG": true,
   "DB_NAME": "DB_NAME",
   "DB_USER": "your-db-user-name",
   "DB_PASSWORD": "DB_PASSWORD",

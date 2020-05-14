@@ -67,7 +67,7 @@ TEMPLATES = [
 if settings.DEVELOPMENT:
     ALLOWED_HOSTS = ['*']
     DEBUG = True
-    STATICFILES_DIRS = [os.path.join(BASE_DIR, "static_root")]
+    STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
     # Set no email server for allauth
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
@@ -133,9 +133,19 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-STATIC_URL = 'static/'
-MEDIA_URL = 'media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
+# Static files (CSS, JavaScript, Images)
+STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+
+# Django storages
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_DEFAULT_ACL = 'public-read'
+AWS_QUERYSTRING_AUTH = False
+
+# Django storage
+DEFAULT_FILE_STORAGE = 'scubadivedubai.custom_storage.MediaStorage'
+STATICFILES_STORAGE = 'scubadivedubai.custom_storage.StaticStorage'
 
 # Auth
 
