@@ -3,7 +3,6 @@
 ## Intro
 
 Welcome to ScubaDiveDubai. This is an E-Commerce application powered by Python using the django framework.
-This application is hosted on an EC2 instance on AWS.
 
 Visit our website:
 
@@ -18,7 +17,7 @@ Dummy user details:
 
 - See all items for sale on landing page
 - Filter by categories
-- Signin or Signup
+- Sign in or Sign up
   - When signing up a signal is triggered to create a new ShopProfile for a user, without is a user cannot purchase items
 - View individual items
 - Add items too cart
@@ -28,7 +27,7 @@ Dummy user details:
 - Add a coupon
 - Proceed to checkout
 - Currently only cash on delivery option available
-- Admin interaface
+- Admin interface
   - Upload csv to populate or update stock items, categories and more..
   - Customized admin list views
 
@@ -36,8 +35,8 @@ Dummy user details:
 
 ### Django allauth
 
-This is used for user authentication and uathorization, it handles all routes and forms with
-class based views, the application ships with most signin and signup templates
+This is used for user authentication and authorization, it handles all routes and forms with
+class based views, the application ships with most sign in and sign up templates
 
 ### Django Countries
 
@@ -51,7 +50,7 @@ Improved form styling using bootstrap4
 
 ### Django Extensions
 
-Used to track todos while developing the application
+Used to track todo's while developing the application
 
 ### Gunicorn
 
@@ -64,7 +63,7 @@ Used to run the app on an EC2 instance on AWS
 - Python : Server side controller
 - Javascript : Client side functionality and interactivity
 - CSS : Originally written in SCSS and compiled to CSS for styling
-  - Most styling is handled by template used from MDBootsrap.com
+  - Most styling is handled by template used from MDBootstrap.com
 - HTML : Basic webpage layout
 
 ### Database
