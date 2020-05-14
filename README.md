@@ -1,13 +1,18 @@
-# ScubaDiveDubai 
+# ScubaDiveDubai
 
 ## Intro
 
 Welcome to ScubaDiveDubai. This is an E-Commerce application powered by Python using the django framework.
-This application is hosted on an EC2 instance on AWS. 
+This application is hosted on an EC2 instance on AWS.
 
 Visit our website:
 
-- [www.scubadivedubai.com](http://www.scubadivedubai.com)
+- [www.scubadivedubai.com](https://scubadivedubai.herokuapp.com/)
+
+Dummy user details:
+
+- Username: cooluser
+- Password: admin
 
 ## Basic functionality
 
@@ -31,7 +36,7 @@ Visit our website:
 
 ### Django allauth
 
-This is used for user authentication and uathorization, it handles all routes and forms with 
+This is used for user authentication and uathorization, it handles all routes and forms with
 class based views, the application ships with most signin and signup templates
 
 ### Django Countries
@@ -66,6 +71,6 @@ Used to run the app on an EC2 instance on AWS
 
 - Currently running SQLite Database
 
-_________________________________________________________________________________________________________________________
+---
 
 #### Created by: Pierre du Toit
