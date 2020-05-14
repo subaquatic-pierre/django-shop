@@ -1,22 +1,18 @@
 
 
 import os
-import json
-
-with open('config.json') as f:
-    config = json.load(f)
 
 
 class Config():
 
-    SECRET_KEY = config.get("SECRET_KEY")
-    DEBUG = config.get("DEBUG")
-    DEVELOPMENT = config.get("DEVELOPMENT")
-    DB_NAME = "DB_NAME"
-    DB_USER = "your-db-user-name"
-    DB_PASSWORD = "DB_PASSWORD"
-    DB_HOST = "DB_HOST"
-    STRIPE_LIVE_PUBLIC_KEY = "STRIPE_LIVE_PUBLIC_KEY"
-    STRIPE_LIVE_SECRET_KEY = "STRIPE_LIVE_SECRET_KEY"
-    EMAIL_HOST_USER = "subaquatic.pierre@gmail.com"
-    EMAIL_HOST_PASSWORD = "somesupersecretpassword"
+    SECRET_KEY = "somesupersecretkey"
+    DEBUG = False
+    DEVELOPMENT = False
+    DB_NAME = "SET_ENVIRON_VARIABLE"
+    DB_USER = "SET_ENVIRON_VARIABLE"
+    DB_PASSWORD = "SET_ENVIRON_VARIABLE"
+    DB_HOST = "SET_ENVIRON_VARIABLE"
+    STRIPE_LIVE_PUBLIC_KEY = "SET_ENVIRON_VARIABLE"
+    STRIPE_LIVE_SECRET_KEY = "SET_ENVIRON_VARIABLE"
+    EMAIL_HOST_USER = "SET_ENVIRON_VARIABLE@USER.COM"
+    EMAIL_HOST_PASSWORD = "SET_ENVIRON_VARIABLE"
