@@ -40,7 +40,7 @@ class based views, the application ships with most sign in and sign up templates
 
 ### Django Countries
 
-Allows the choice of countries in checkout view
+Allows the choice of countries in checkout view. All auth allows easy user authentication.
 
 ### Crispy Forms
 
