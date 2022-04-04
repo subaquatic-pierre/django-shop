@@ -4,10 +4,6 @@
 
 Welcome to ScubaDiveDubai. This is an E-Commerce application powered by Python using the django framework.
 
-Visit our website:
-
-- [www.scubadivedubai.com](https://scubadivedubai.herokuapp.com/)
-
 Dummy user details:
 
 - Username: cooluser
