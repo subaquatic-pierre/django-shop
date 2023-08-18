@@ -6,7 +6,7 @@ import os
 class Config():
 
     SECRET_KEY = "somesupersecretkey"
-    DEBUG = False
+    DEBUG = True
     DEVELOPMENT = False
     DB_NAME = "SET_ENVIRON_VARIABLE"
     DB_USER = "SET_ENVIRON_VARIABLE"

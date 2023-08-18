@@ -1,6 +1,10 @@
 from .base import *
 import os
 from .config import Config
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 # Ititialize settings from config.json file
 settings = Config()
@@ -103,17 +107,19 @@ if settings.DEVELOPMENT:
 # Production environment
 else:
     ALLOWED_HOSTS = ['*']
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
+    # STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
     DEBUG = settings.DEBUG
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 
     # Email settings
 
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    EMAIL_HOST = 'smtp.gmail.com'
-    EMAIL_PORT = 587
-    EMAIL_USE_TLS = True
-    EMAIL_HOST_USER = settings.EMAIL_HOST_USER
-    EMAIL_HOST_PASSWORD = settings.EMAIL_HOST_PASSWORD
+    # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    # EMAIL_HOST = 'smtp.gmail.com'
+    # EMAIL_PORT = 587
+    # EMAIL_USE_TLS = True
+    # EMAIL_HOST_USER = settings.EMAIL_HOST_USER
+    # EMAIL_HOST_PASSWORD = settings.EMAIL_HOST_PASSWORD
     # Set to ChopConfig to allow for shop signals to work
     INSTALLED_APPS += ['shop.apps.ShopConfig']
 

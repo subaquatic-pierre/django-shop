@@ -1,8 +1,12 @@
+asgiref==3.7.2
 autopep8==1.4.4
 boto3==1.13.9
 botocore==1.16.9
 certifi==2019.3.9
+cffi==1.15.1
 chardet==3.0.4
+charset-normalizer==3.2.0
+cryptography==41.0.3
 defusedxml==0.6.0
 Django==2.2.13
 django-allauth==0.39.1
@@ -16,11 +20,15 @@ gunicorn==20.0.4
 idna==2.8
 jmespath==0.10.0
 oauthlib==3.0.1
+packaging==23.1
 pep8==1.7.1
-Pillow>=7.1.0
+Pillow==10.0.0
 pycodestyle==2.5.0
+pycparser==2.21
+PyJWT==2.8.0
 python-dateutil==2.8.1
 python-decouple==3.1
+python-dotenv==1.0.0
 python3-openid==3.1.0
 pytz==2018.5
 requests==2.21.0
@@ -29,4 +37,5 @@ s3transfer==0.3.3
 six==1.13.0
 sqlparse==0.2.4
 stripe==2.41.0
+typing_extensions==4.7.1
 urllib3==1.24.2
