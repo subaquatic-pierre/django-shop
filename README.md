@@ -2,12 +2,7 @@
 
 ## Intro
 
-Welcome to ScubaDiveDubai. This is an E-Commerce application powered by Python using the django framework.
-
-Dummy user details:
-
-- Username: cooluser
-- Password: admin
+Welcome to Django Shop. This is an E-Commerce application powered by Python using the django framework.
 
 ## Basic functionality
 
