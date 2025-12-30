@@ -1,4 +1,4 @@
-# ScubaDiveDubai
+# Django Shop
 
 ## Intro
 
